@@ -7,17 +7,15 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import $ from 'jquery';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { InputAdornment } from '@mui/material';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 
 const theme = createTheme();
-
 
 export default function SignIn() {
 
     const [count, setCount] = React.useState("");
-
     const handleSubmit = (event) => {
-        // let setProduct = null;
-
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         var getLink = data.get('email');
@@ -35,10 +33,6 @@ export default function SignIn() {
             "apikey": "26610cc5ff0442b69d0429f230e2a055"
         }
 
-        // let resultLink = {
-        //     newLink: null
-        // }
-
         $.ajax({
             url: "https://api.rebrandly.com/v1/links",
             dataType: 'json',
@@ -50,8 +44,6 @@ export default function SignIn() {
                 setCount(`https://outline.com/${link.shortUrl}`)
             },
         });
-
-
     };
 
     return (
@@ -72,9 +64,9 @@ export default function SignIn() {
                         Annotate any article!
                     </Typography>
 
-
                     <Box component="form" onSubmit={handleSubmit} noValidate>
                         <TextField
+                            color="secondary"
                             margin="normal"
                             required
                             id="email"
@@ -86,28 +78,35 @@ export default function SignIn() {
                         <Button
                             type="submit"
                             fullWidth
+                            color="secondary"
                             variant="contained"
-                            sx={{ mt: 3, mb: 2 }}
+                            sx={{ mt: 4, mb: 2 }}
                         >
                             Process
 
                         </Button>
-
                         <TextField
                             label="Output link"
                             id="outlined-read-only-input"
+                            color="secondary"
                             fullWidth
+                            InputProps={{
+                                endAdornment: (
+                                    <InputAdornment position="end">
+                                        <ContentCopyIcon />
+                                    </InputAdornment>
+                                )
+
+                            }}
+
+                            onClick={() => { navigator.clipboard.writeText(count) }}
                             value={count}
-                            sx={{ mt: 3, mb: 2 }}
-                        />
+                            sx={{ mt: 3, mb: 2 }} >
+
+                        </TextField>
                     </Box>
-
-
-
                 </Box>
             </Container>
-
-
         </ThemeProvider>
     );
 }
