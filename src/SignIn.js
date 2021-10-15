@@ -18,7 +18,7 @@ export default function SignIn() {
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        var getLink = data.get('email');
+        var getLink = data.get('formLink');
         if (!getLink.includes("https") || !getLink.includes("http")) {
             getLink = "https://" + getLink;
         }
@@ -47,7 +47,6 @@ export default function SignIn() {
     };
 
     return (
-
         <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
@@ -69,9 +68,9 @@ export default function SignIn() {
                             color="secondary"
                             margin="normal"
                             required
-                            id="email"
+                            id="formLink"
                             label="Article Link"
-                            name="email"
+                            name="formLink"
                             fullWidth
                             autoFocus
                         />
@@ -98,11 +97,9 @@ export default function SignIn() {
                                 )
 
                             }}
-
                             onClick={() => { navigator.clipboard.writeText(count) }}
                             value={count}
                             sx={{ mt: 3, mb: 2 }} >
-
                         </TextField>
                     </Box>
                 </Box>
