@@ -9,9 +9,11 @@ import $ from 'jquery';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { InputAdornment } from '@mui/material';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+
 
 const theme = createTheme();
-
 export default function SignIn() {
 
     const [count, setCount] = React.useState("");
@@ -70,6 +72,7 @@ export default function SignIn() {
                             required
                             id="formLink"
                             label="Article Link"
+                            placeholder='example: nytimes.com/2021/10/15/business...'
                             name="formLink"
                             fullWidth
                             autoFocus
@@ -86,18 +89,22 @@ export default function SignIn() {
                         </Button>
                         <TextField
                             label="Output link"
-                            id="outlined-read-only-input"
                             color="secondary"
+                            title={count}
                             fullWidth
                             InputProps={{
+                                readOnly: true,
                                 endAdornment: (
                                     <InputAdornment position="end">
-                                        <ContentCopyIcon />
+                                        <Tooltip title="Copy Link"
+                                            onClick={() => { navigator.clipboard.writeText(count) }}>
+                                            <IconButton>
+                                                <ContentCopyIcon />
+                                            </IconButton>
+                                        </Tooltip>
                                     </InputAdornment>
                                 )
-
                             }}
-                            onClick={() => { navigator.clipboard.writeText(count) }}
                             value={count}
                             sx={{ mt: 3, mb: 2 }} >
                         </TextField>
