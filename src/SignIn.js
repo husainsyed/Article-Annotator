@@ -21,31 +21,35 @@ export default function SignIn() {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
         var getLink = data.get('formLink');
-        if (!getLink.includes("https") || !getLink.includes("http")) {
-            getLink = "https://" + getLink;
+
+        if (getLink.length !== 0) {
+            if (!getLink.includes("https") || !getLink.includes("http")) {
+                getLink = "https://" + getLink;
+            }
+
+            let linkRequest = {
+                destination: getLink,
+                domain: { fullName: "rebrand.ly" }
+            }
+
+            let requestHeaders = {
+                "Content-Type": "application/json",
+                "apikey": "26610cc5ff0442b69d0429f230e2a055"
+            }
+
+            $.ajax({
+                url: "https://api.rebrandly.com/v1/links",
+                dataType: 'json',
+                contentType: 'json',
+                type: "post",
+                data: JSON.stringify(linkRequest),
+                headers: requestHeaders,
+                success: (link) => {
+                    setCount(`https://outline.com/${link.shortUrl}`)
+                },
+            });
         }
 
-        let linkRequest = {
-            destination: getLink,
-            domain: { fullName: "rebrand.ly" }
-        }
-
-        let requestHeaders = {
-            "Content-Type": "application/json",
-            "apikey": "26610cc5ff0442b69d0429f230e2a055"
-        }
-
-        $.ajax({
-            url: "https://api.rebrandly.com/v1/links",
-            dataType: 'json',
-            contentType: 'json',
-            type: "post",
-            data: JSON.stringify(linkRequest),
-            headers: requestHeaders,
-            success: (link) => {
-                setCount(`https://outline.com/${link.shortUrl}`)
-            },
-        });
     };
 
     return (
