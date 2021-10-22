@@ -113,7 +113,7 @@ export default function SignIn() {
                     </Box>
                 </Box>
                 <br></br>
-                <p style={{ textAlignVertical: "center", textAlign: "center" }}> <a href="https://forms.gle/goDKLQxtK2qX7Jp28" target="_blank">Anonymous Survey</a></p>
+                <p style={{ textAlignVertical: "center", textAlign: "center" }}> <a href="https://forms.gle/goDKLQxtK2qX7Jp28" target="_blank" rel="noreferrer noopener">Anonymous Survey</a></p>
             </Container>
         </ThemeProvider>
     );
