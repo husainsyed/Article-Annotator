@@ -12,10 +12,8 @@ import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import IconButton from '@mui/material/IconButton';
 import Tooltip from '@mui/material/Tooltip';
 
-
 const theme = createTheme();
 export default function SignIn() {
-
     const [count, setCount] = React.useState("");
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -114,6 +112,8 @@ export default function SignIn() {
                         </TextField>
                     </Box>
                 </Box>
+                <br></br>
+                <p style={{ textAlignVertical: "center", textAlign: "center" }}> <a href="https://forms.gle/goDKLQxtK2qX7Jp28" target="_blank">Anonymous Survey</a></p>
             </Container>
         </ThemeProvider>
     );
