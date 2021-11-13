@@ -11,6 +11,8 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 const theme = createTheme();
 export default function SignIn() {
     const [count, setCount] = React.useState("");
+    const [show, setShow] = React.useState(false);
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
@@ -39,11 +41,12 @@ export default function SignIn() {
                 data: JSON.stringify(linkRequest),
                 headers: requestHeaders,
                 success: (link) => {
+                    setShow(true)
                     setCount(`https://outline.com/${link.shortUrl}`)
+
                 },
             });
         }
-
     };
 
     return (
@@ -63,7 +66,15 @@ export default function SignIn() {
                         Annotate any article!
                     </Typography>
 
-                    <Box component="form" onSubmit={handleSubmit} noValidate>
+                    <Box component="form" onSubmit={handleSubmit} noValidate
+
+                        sx={{
+                            mt: 3,
+                            mb: 2,
+                        }}
+
+                        fullWidth
+                    >
                         <TextField
                             color="secondary"
                             margin="normal"
@@ -72,20 +83,34 @@ export default function SignIn() {
                             label="Article Link"
                             placeholder='example: nytimes.com/2021/10/15/business...'
                             name="formLink"
-                            fullWidth
                             autoFocus
+                            fullWidth
                         />
                         <Button
                             type="submit"
-                            fullWidth
                             color="secondary"
                             variant="contained"
-                            sx={{ mt: 4, mb: 2 }}
+                            fullWidth
                         >
                             Process
 
                         </Button>
-                        <a href={count} target="_blank" rel="noreferrer noopener">
+                        
+                        {show ? <a href={count} target="_blank" rel="noreferrer noopener">
+                            <TextField
+                                label="Output link"
+                                color="secondary"
+                                fullWidth
+                                InputProps={{ readOnly: true }}
+                                value={count}
+                                sx={{
+                                    mt: 3,
+                                    mb: 2,
+                                    '.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': { cursor: 'pointer' },
+                                }}
+                            >
+                            </TextField> </a> :
+
                             <TextField
                                 label="Output link"
                                 color="secondary"
@@ -99,7 +124,7 @@ export default function SignIn() {
                                 }}
                             >
                             </TextField>
-                        </a>
+                        }
                     </Box>
                 </Box>
             </Container>
