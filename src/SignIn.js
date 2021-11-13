@@ -7,10 +7,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import $ from 'jquery';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { InputAdornment } from '@mui/material';
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
-import IconButton from '@mui/material/IconButton';
-import Tooltip from '@mui/material/Tooltip';
 
 const theme = createTheme();
 export default function SignIn() {
@@ -89,31 +85,23 @@ export default function SignIn() {
                             Process
 
                         </Button>
-                        <TextField
-                            label="Output link"
-                            color="secondary"
-                            title={count}
-                            fullWidth
-                            InputProps={{
-                                readOnly: true,
-                                endAdornment: (
-                                    <InputAdornment position="end">
-                                        <Tooltip title="Copy Link"
-                                            onClick={() => { navigator.clipboard.writeText(count) }}>
-                                            <IconButton>
-                                                <ContentCopyIcon />
-                                            </IconButton>
-                                        </Tooltip>
-                                    </InputAdornment>
-                                )
-                            }}
-                            value={count}
-                            sx={{ mt: 3, mb: 2 }} >
-                        </TextField>
+                        <a href={count} target="_blank" rel="noreferrer noopener">
+                            <TextField
+                                label="Output link"
+                                color="secondary"
+                                fullWidth
+                                InputProps={{ readOnly: true }}
+                                value={count}
+                                sx={{
+                                    mt: 3,
+                                    mb: 2,
+                                    '.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': { cursor: 'pointer' },
+                                }}
+                            >
+                            </TextField>
+                        </a>
                     </Box>
                 </Box>
-                <br></br>
-                <p style={{ textAlignVertical: "center", textAlign: "center" }}> <a href="https://forms.gle/goDKLQxtK2qX7Jp28" target="_blank" rel="noreferrer noopener">Anonymous Survey</a></p>
             </Container>
         </ThemeProvider>
     );
