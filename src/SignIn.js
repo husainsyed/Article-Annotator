@@ -106,7 +106,7 @@ export default function SignIn() {
                                 sx={{
                                     mt: 3,
                                     mb: 2,
-                                    '.css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input': { cursor: 'pointer' },
+                                    '.css-1x5jdmq': { cursor: 'pointer' },
                                 }}
                             >
                             </TextField> </a> :
